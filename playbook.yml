@@ -1,0 +1,21 @@
+---
+- name: update snow
+  hosts: localhost
+  gather_facts: false
+
+  # requires pip3 --user install pysnow
+
+  vars_files:
+  - vault.yml
+
+  tasks:
+  - name: Update a requested item
+    snow_record:
+      username: admin
+      password: "{{ snow_pass }}"
+      instance: "{{ snow_instance }}"
+      state: present
+      number: "{{ snow_ritm }}"
+      table: sc_req_item
+      data:
+        work_notes : "{{ snow_note }}"
